@@ -22,7 +22,7 @@ Notely is a simple note-taking web application built with React and TypeScript. 
 1. **Clone the repository:**
 
    ```sh
-   git clone https://github.com/briannjoroge/notely-client.git
+   git clone https://github.com/briannjoroge/notely-client-side.git
 
    cd notely-client-side
    ```
