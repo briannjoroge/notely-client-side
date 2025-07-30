@@ -20,6 +20,7 @@ function UpdatePassword() {
   const [isNewPasswordMatch, setIsNewPasswordMatch] = useState(false);
   const [isNewPasswordValid, setIsNewPasswordValid] = useState(false);
   const [passwordMismatchError, setPasswordMismatchError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   function validatePassword(password: string): boolean {
     const hasUpperCase = /[A-Z]/.test(password);
@@ -47,11 +48,13 @@ function UpdatePassword() {
       return;
     }
 
+    setIsLoading(true);
     try {
       const validCurrent = await checkCurrentPassword(currentPassword);
       if (!validCurrent) {
         toast.error("Your current password is incorrect.");
         setCurrentPassword("");
+        setIsLoading(false);
         return;
       }
 
@@ -63,6 +66,7 @@ function UpdatePassword() {
     } catch {
       toast.error("Something went wrong while updating password.");
     }
+    setIsLoading(false);
   };
 
   function handleConfirmPassword(e: React.ChangeEvent<HTMLInputElement>) {
@@ -135,8 +139,13 @@ function UpdatePassword() {
           )}
 
           <Box sx={{ display: "flex", justifyContent: "center" }}>
-            <Button type="submit" variant="contained" color="primary">
-              Update Password
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              disabled={isLoading}
+            >
+              {isLoading ? "Updating..." : "Update Password"}
             </Button>
           </Box>
         </Box>

@@ -179,8 +179,14 @@ function UpdateNote() {
                 >
                   Cancel
                 </Button>
-                <Button type="submit" variant="contained" color="primary">
-                  Update Note
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  disabled={isLoading}
+                >
+                  {isLoading ? "Updating Note..." : "Update Note"}
+                  {/* Update Note */}
                 </Button>
               </Box>
             </Box>
